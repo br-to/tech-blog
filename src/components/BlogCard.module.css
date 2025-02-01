@@ -1,0 +1,62 @@
+/* Component */
+.blog-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  transition: box-shadow 0.3s;
+  background-color: #fff;
+
+  &:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+
+  &:hover > .image-container > .image {
+    transform: scale(1.05);
+  }
+
+  &:hover > .content > .title {
+    color: var(--color-primary);
+  }
+
+  & > .content {
+    padding: var(--spacing-4);
+  }
+
+  & > .content > .category {
+    display: block;
+    margin-bottom: var(--spacing-2);
+    color: var(--color-primary);
+    font-size: 0.875rem;
+  }
+
+  & > .content > .title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: var(--color-text);
+    line-height: 1.25;
+    transition: color 0.2s;
+  }
+}
+
+/* Elements */
+.image-container {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.image-container {
+  & > .image {
+    object-fit: cover;
+    transition: transform 0.3s;
+  }
+}
+
+.video-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.2);
+}

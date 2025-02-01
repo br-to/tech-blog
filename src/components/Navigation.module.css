@@ -1,0 +1,49 @@
+/* Component */
+.navigation {
+  width: 100%;
+  background-color: #fff;
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* Elements */
+.navigation > .container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-4);
+}
+
+.navigation > .container > .nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 4rem;
+}
+
+.navigation > .container > .nav > .logo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.navigation > .container > .nav > .sns {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-6);
+}
+
+/* Child elements */
+.navigation > .container > .nav > .sns > .item {
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color 0.2s;
+}
+
+/* States */
+.navigation > .container > .nav > .sns > .item:hover {
+  color: var(--color-text);
+}
