@@ -1,0 +1,12 @@
+.not-found {
+  max-width: var(--max-width);
+  padding: var(--spacing-12) var(--spacing-4);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 0 auto;
+
+  & > .title {
+    font-size: 2rem;
+  }
+}

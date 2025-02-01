@@ -1,0 +1,10 @@
+.footer {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-4);
+  margin-top: auto;
+
+  & > .copyright {
+    color: var(--color-text-secondary);
+  }
+}

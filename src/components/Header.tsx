@@ -1,11 +1,11 @@
 import { EXTERNAL_URLS } from "@/constants/externalUrls";
 import Image from "next/image";
 import Link from "next/link";
-import styles from "./Navigation.module.css";
+import styles from "./Header.module.css";
 
-export function Navigation() {
+export function Header() {
 	return (
-		<header className={styles.navigation}>
+		<header className={styles.header}>
 			<div className={styles.container}>
 				<nav className={styles.nav}>
 					<Link href="/" className={styles.logo}>
