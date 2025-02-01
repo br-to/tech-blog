@@ -13,10 +13,18 @@ export function Navigation() {
 					</Link>
 
 					<div className={styles.sns}>
-						<Link href={EXTERNAL_URLS.GITHUB} className={styles.item}>
+						<Link
+							href={EXTERNAL_URLS.GITHUB}
+							className={styles.item}
+							target="_blank"
+						>
 							<Image src="/github.png" width={20} height={20} alt="github" />
 						</Link>
-						<Link href={EXTERNAL_URLS.LINKDEIN} className={styles.item}>
+						<Link
+							href={EXTERNAL_URLS.LINKDEIN}
+							className={styles.item}
+							target="_blank"
+						>
 							<Image
 								src="/linkedin.png"
 								width={20}
