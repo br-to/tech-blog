@@ -1,0 +1,19 @@
+.blog-detail-page {
+  & > .main {
+    max-width: var(--max-width-blog);
+    margin: 0 auto;
+    padding: var(--spacing-12) var(--spacing-4);
+  }
+
+  & > .main > .title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-6);
+  }
+
+  & > .main > .date {
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-6);
+  }
+}
