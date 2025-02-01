@@ -1,5 +1,4 @@
 import { BlogCard } from "@/components/BlogCard";
-import { Navigation } from "@/components/Navigation";
 import styles from "./page.module.css";
 
 type BlogPost = {
@@ -68,7 +67,6 @@ const samplePosts: BlogPost[] = [
 export default function Page() {
 	return (
 		<div className={styles["blog-page"]}>
-			<Navigation />
 			<main className={styles.main}>
 				<h1 className={styles.title}>All Posts</h1>
 				<div className={styles.grid}>
