@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import "@radix-ui/themes/styles.css";
 import "@/styles/reset.css";
 import "@/styles/globals.css";
-import { Footer } from "@/components/Footer";
-import { Header } from "@/components/Header";
+import { Footer } from "@/components/parts/Footer";
+import { Header } from "@/components/parts/Header";
+import { Theme } from "@radix-ui/themes";
 
 export const metadata: Metadata = {
 	title: "Toi Devlog: Home",
@@ -17,9 +19,11 @@ export default function RootLayout({
 	return (
 		<html lang="ja">
 			<body>
-				<Header />
-				{children}
-				<Footer />
+				<Theme>
+					<Header />
+					{children}
+					<Footer />
+				</Theme>
 			</body>
 		</html>
 	);
