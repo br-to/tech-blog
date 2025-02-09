@@ -1,4 +1,4 @@
-import { BlogCard } from "@/components/BlogCard";
+import { BlogCard } from "@/components/parts/BlogCard";
 import styles from "./page.module.css";
 
 type BlogPost = {
