@@ -1,0 +1,44 @@
+/* Component */
+.header {
+  width: 100%;
+  background-color: #fff;
+  border-bottom: 1px solid var(--color-border);
+
+  & > .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-4);
+  }
+
+  & > .container > .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 4rem;
+  }
+
+  & > .container > .nav > .logo {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  & > .container > .nav > .link {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 var(--spacing-4);
+    background-color: var(--color-button);
+    color: var(--color-background);
+    text-decoration: none;
+    border-radius: var(--round-m);
+    height: 40px;
+  }
+
+  & > .container > .nav > .link:hover {
+    background-color: var(--color-hover-button);
+  }
+}
