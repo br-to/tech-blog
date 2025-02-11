@@ -1,6 +1,6 @@
 .blog-detail-page {
   & > .main {
-    max-width: var(--max-width-blog);
+    max-width: var(--max-width);
     margin: 0 auto;
     padding: var(--spacing-12) var(--spacing-4);
   }
