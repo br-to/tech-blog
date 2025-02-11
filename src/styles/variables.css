@@ -3,6 +3,8 @@
   --color-text: #1f2937;
   --color-text-secondary: #6b7280;
   --color-background: #f9fafb;
+  --color-button: #3e63dd;
+  --color-hover-button: #3358d4;
   --color-border: #e5e7eb;
   --max-width: 1200px;
   --spacing-1: 0.25rem;
@@ -12,4 +14,5 @@
   --spacing-6: 1.5rem;
   --spacing-8: 2rem;
   --spacing-12: 3rem;
+  --round-m: 4px;
 }
