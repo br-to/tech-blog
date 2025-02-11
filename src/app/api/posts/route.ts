@@ -35,7 +35,6 @@ export async function POST(req: Request) {
 
 	try {
 		const { values } = await req.json();
-		console.log(values, req);
 
 		const { data, error } = await supabase
 			.from("posts")
