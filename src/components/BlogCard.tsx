@@ -2,11 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./BlogCard.module.css";
 
-type BlogPost = {
+export type BlogPost = {
 	id: string;
 	title: string;
-	category: string;
-	imageUrl: string;
+	status: string;
+	mainImage: string;
 	slug: string;
 };
 
@@ -20,14 +20,14 @@ export function BlogCard({ post }: BlogCardProps) {
 			<article className={styles["blog-card"]}>
 				<div className={styles["image-container"]}>
 					<Image
-						src={post.imageUrl || "/test.jpg"}
+						src={post.mainImage || "/test.jpg"}
 						alt={post.title}
 						fill
 						className={styles.image}
 					/>
 				</div>
 				<div className={styles.content}>
-					<span className={styles.category}>{post.category}</span>
+					<span className={styles.category}>{post.status}</span>
 					<h2 className={styles.title}>{post.title}</h2>
 				</div>
 			</article>
