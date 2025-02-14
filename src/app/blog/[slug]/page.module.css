@@ -16,4 +16,12 @@
     color: var(--color-text-secondary);
     margin-bottom: var(--spacing-6);
   }
+
+  & > .main > .blocks {
+    margin-bottom: var(--spacing-4);
+  }
+
+  & > .main > .blocks:last-child {
+    margin-bottom: 0;
+  }
 }
