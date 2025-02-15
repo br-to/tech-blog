@@ -25,3 +25,16 @@
     margin-bottom: 0;
   }
 }
+
+.image-container {
+  position: relative;
+  aspect-ratio: 100 / 42;
+  overflow: hidden;
+  width: 100%;
+  margin: 0 0 var(--spacing-12);
+  max-height: 420px;
+
+  & > .image {
+    object-fit: cover;
+  }
+}
