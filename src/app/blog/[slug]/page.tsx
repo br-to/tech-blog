@@ -1,6 +1,7 @@
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import "github-markdown-css";
+import { format } from "date-fns";
 import { notFound } from "next/navigation";
 import styles from "./page.module.css";
 
@@ -33,7 +34,9 @@ export default async function Page({
 		<div className={styles["blog-detail-page"]}>
 			<main className={styles.main}>
 				<h1 className={styles.title}>{blogContent.title}</h1>
-				<p className={styles.date}>Monday, February 25, 2019 · 6 min read</p>
+				<p className={styles.date}>
+					{format(new Date(blogContent.publishedAt), "yyyy/MM/dd")}
+				</p>
 				{blogContent.mdblocks.map((mdblock: any) => {
 					const formattedMarkdown = mdblock.parent.replace(/\n/g, "  \n");
 					return (
