@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./BlogCard.module.css";
@@ -5,6 +6,7 @@ import styles from "./BlogCard.module.css";
 export type BlogPost = {
 	id: string;
 	title: string;
+	publishedAt: string;
 	contentTypes: string[];
 	mainImage: string;
 	slug: string;
@@ -36,6 +38,9 @@ export function BlogCard({ post }: BlogCardProps) {
 							))}
 						</div>
 					)}
+					<p className={styles.date}>
+						{format(post.publishedAt, "yyyy/MM/dd")}
+					</p>
 					<h2 className={styles.title}>{post.title}</h2>
 				</div>
 			</article>
