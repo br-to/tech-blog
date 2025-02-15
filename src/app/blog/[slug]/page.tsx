@@ -106,13 +106,19 @@ export default async function Page({
 										<ol className={styles.ol} {...props} />
 									),
 									li: ({ node, ...props }) => <li {...props} />,
-									code: ({ node, className, children, ...props }) => {
+									code: ({
+										node,
+										className,
+										children,
+										style,
+										...props
+									}: any) => {
 										const language = className?.split("-")?.at(-1);
 
 										if (!language) {
 											return (
 												<code className={className} {...props}>
-													{children}
+													{formattedMarkdown}
 												</code>
 											);
 										}
@@ -124,7 +130,7 @@ export default async function Page({
 												PreTag="div"
 												{...props}
 											>
-												{children}
+												{children?.toString() as string}
 											</SyntaxHighlighter>
 										);
 									},
