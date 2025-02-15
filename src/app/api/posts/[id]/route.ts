@@ -37,12 +37,13 @@ export const GET = async (
 		const post = posts[0] as any;
 		const title = post.properties.title.title[0]?.plain_text;
 		const publishedAt = post.properties.published_at.date.start;
+		const mainImage = post.properties.main_image.files[0]?.file.url;
 
 		const mdblocks = (await n2m.pageToMarkdown(post.id, 2)).filter(
 			(mdblock) => mdblock.parent !== "",
 		);
 
-		return NextResponse.json({ title, publishedAt, mdblocks });
+		return NextResponse.json({ title, publishedAt, mainImage, mdblocks });
 	} catch (err) {
 		return NextResponse.json(
 			{ error: "Something went wrong" },

@@ -5,8 +5,8 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 
 export const metadata: Metadata = {
-	title: "Toi Devlog: Home",
-	description: "This blog is Toi Kobara's devlog.",
+	title: "br-to Devlog",
+	description: "This blog is br-to's devlog.",
 };
 
 export default function RootLayout({

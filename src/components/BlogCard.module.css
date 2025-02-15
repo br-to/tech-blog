@@ -16,6 +16,7 @@
 
   & > .content {
     padding: var(--spacing-4);
+    min-height: 150px;
   }
 
   & > .content > .category {
@@ -50,16 +51,19 @@
     font-size: 12px;
     padding: 6px 12px;
   }
+
+  & > .content > .date {
+    margin-bottom: var(--spacing-2);
+    color: var(--color-text);
+    font-size: 0.875rem;
+  }
 }
 
-/* Elements */
 .image-container {
   position: relative;
   aspect-ratio: 16 / 9;
   overflow: hidden;
-}
 
-.image-container {
   & > .image {
     object-fit: cover;
     transition: transform 0.3s;
