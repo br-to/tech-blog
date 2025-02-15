@@ -9,7 +9,7 @@ export function Header() {
 			<div className={styles.container}>
 				<nav className={styles.nav}>
 					<Link href="/" className={styles.logo}>
-						Toi DevLog
+						br-to DevLog
 					</Link>
 
 					<div className={styles.sns}>

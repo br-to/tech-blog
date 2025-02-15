@@ -4,7 +4,7 @@ export function Footer() {
 	const currentYear = new Date().getFullYear();
 	return (
 		<footer className={styles.footer}>
-			<p className={styles.copyright}>© Toi Kobara {currentYear}</p>
+			<p className={styles.copyright}>© br-to {currentYear}</p>
 		</footer>
 	);
 }
