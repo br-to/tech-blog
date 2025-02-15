@@ -59,14 +59,11 @@
   }
 }
 
-/* Elements */
 .image-container {
   position: relative;
   aspect-ratio: 16 / 9;
   overflow: hidden;
-}
 
-.image-container {
   & > .image {
     object-fit: cover;
     transition: transform 0.3s;
