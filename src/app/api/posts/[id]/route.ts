@@ -8,31 +8,6 @@ const notion = new Client({
 
 const n2m = new NotionToMarkdown({ notionClient: notion });
 
-// TODO: 型ちゃんとする
-// type Post = {
-// 	id: string;
-// 	properties: {
-// 		// content_type: { multi_select: string[] };
-// 		// main_image: { files: string[] };
-// 		// url: { rich_text: string[] };
-// 		// status: { status: [Object] };
-// 		published_at: {
-// 			date: {
-// 				start: string;
-// 			};
-// 		};
-// 		title: {
-// 			id: "title";
-// 			type: "title";
-// 			title: [
-// 				{
-// 					plain_text: string;
-// 				},
-// 			];
-// 		};
-// 	};
-// };
-
 export const GET = async (
 	_: Request,
 	{ params }: { params: Promise<{ id: string }> },
@@ -61,12 +36,13 @@ export const GET = async (
 
 		const post = posts[0] as any;
 		const title = post.properties.title.title[0]?.plain_text;
+		const publishedAt = post.properties.published_at.date.start;
 
 		const mdblocks = (await n2m.pageToMarkdown(post.id, 2)).filter(
 			(mdblock) => mdblock.parent !== "",
 		);
 
-		return NextResponse.json({ title, mdblocks });
+		return NextResponse.json({ title, publishedAt, mdblocks });
 	} catch (err) {
 		return NextResponse.json(
 			{ error: "Something went wrong" },

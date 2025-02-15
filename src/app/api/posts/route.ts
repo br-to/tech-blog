@@ -41,6 +41,12 @@ export const GET = async () => {
 					direction: "descending",
 				},
 			],
+			filter: {
+				property: "status",
+				status: {
+					equals: "published",
+				},
+			},
 		});
 		const posts = response.results;
 		const postsProperties = posts.map((post: any) => {
@@ -48,13 +54,12 @@ export const GET = async () => {
 			const title = post.properties.title.title[0]?.plain_text;
 			const slug = post.properties.slug.rich_text[0]?.plain_text;
 			const publishedAt = post.properties.published_at.date.start;
-			const status = post.properties.status.status.name;
 			const contentTypes = post.properties.content_type.multi_select.map(
 				(item: any) => item.name,
 			);
 			const mainImage = post.properties.main_image.files[0]?.file.url;
 
-			return { id, title, slug, publishedAt, status, contentTypes, mainImage };
+			return { id, title, slug, publishedAt, contentTypes, mainImage };
 		});
 
 		if (postsProperties.length <= 0) {

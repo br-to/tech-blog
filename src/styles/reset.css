@@ -61,12 +61,6 @@ img {
   display: block;
 }
 
-/* Natural flow and rhythm in articles by default */
-/* article要素内の要素に自然な流れとリズムを定義 */
-article > * + * {
-  margin-top: 1em;
-}
-
 /* Inherit fonts for inputs and buttons */
 /* inputやbuttonなどのフォントは継承を定義 */
 input,

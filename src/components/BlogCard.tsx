@@ -5,7 +5,7 @@ import styles from "./BlogCard.module.css";
 export type BlogPost = {
 	id: string;
 	title: string;
-	status: string;
+	contentTypes: string[];
 	mainImage: string;
 	slug: string;
 };
@@ -27,7 +27,15 @@ export function BlogCard({ post }: BlogCardProps) {
 					/>
 				</div>
 				<div className={styles.content}>
-					<span className={styles.category}>{post.status}</span>
+					{post.contentTypes && post.contentTypes.length > 0 && (
+						<div className={styles.categories}>
+							{post.contentTypes.map((contentType, index) => (
+								<p className={styles.category} key={`${index}-${contentType}`}>
+									{contentType}
+								</p>
+							))}
+						</div>
+					)}
 					<h2 className={styles.title}>{post.title}</h2>
 				</div>
 			</article>
