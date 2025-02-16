@@ -124,7 +124,7 @@ export default async function Page({
 										if (!language) {
 											return (
 												<code className={className} {...props}>
-													{formattedMarkdown}
+													{children}
 												</code>
 											);
 										}
