@@ -20,6 +20,9 @@ export const generateMetadata = async ({
 			headers: {
 				"Content-Type": "application/json",
 			},
+			next: {
+				revalidate: 30,
+			},
 		},
 	);
 
@@ -56,8 +59,6 @@ export const generateMetadata = async ({
 
 // 常に動的レンダリングを強制する これをいれないとbuildでこけるため
 export const dynamic = "force-dynamic";
-// 60秒間のキャッシュ
-export const revalidate = 60;
 
 export default async function Page({
 	params,
@@ -69,6 +70,9 @@ export default async function Page({
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
+			},
+			next: {
+				revalidate: 30,
 			},
 		},
 	);
@@ -106,6 +110,8 @@ export default async function Page({
 										<ol className={styles.ol} {...props} />
 									),
 									li: ({ node, ...props }) => <li {...props} />,
+									// ブログ記事内のaタグは全て別タブ遷移にする
+									a: ({ node, ...props }) => <a target="_blank" {...props} />,
 									code: ({
 										node,
 										className,
