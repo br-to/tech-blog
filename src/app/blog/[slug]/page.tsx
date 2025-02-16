@@ -110,6 +110,8 @@ export default async function Page({
 										<ol className={styles.ol} {...props} />
 									),
 									li: ({ node, ...props }) => <li {...props} />,
+									// ブログ記事内のaタグは全て別タブ遷移にする
+									a: ({ node, ...props }) => <a target="_blank" {...props} />,
 									code: ({
 										node,
 										className,
