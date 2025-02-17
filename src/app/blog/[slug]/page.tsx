@@ -91,6 +91,10 @@ export default async function Page({
 					alt={blogContent.title}
 					fill
 					className={styles.image}
+					sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
+					priority
 				/>
 			</div>
 			<main className={styles.main}>
