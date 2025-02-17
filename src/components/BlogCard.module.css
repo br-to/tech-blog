@@ -34,22 +34,11 @@
     transition: color 0.2s;
   }
 
-  & > .content > .categories {
+  & > .content > .contentTypes {
     display: flex;
     align-items: center;
     gap: var(--spacing-2);
     margin-bottom: var(--spacing-2);
-  }
-
-  & > .content > .categories > .category {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 16px;
-    color: var(--color-text);
-    background-color: rgba(0, 0, 0, 0.08);
-    font-size: 12px;
-    padding: 6px 12px;
   }
 
   & > .content > .date {
