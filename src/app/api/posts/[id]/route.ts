@@ -38,12 +38,21 @@ export const GET = async (
 		const title = post.properties.title.title[0]?.plain_text;
 		const publishedAt = post.properties.published_at.date.start;
 		const mainImage = post.properties.main_image.files[0]?.file.url;
+		const contentTypes = post.properties.content_type.multi_select.map(
+			(item: any) => item.name,
+		);
 
 		const mdblocks = (await n2m.pageToMarkdown(post.id, 2)).filter(
 			(mdblock) => mdblock.parent !== "",
 		);
 
-		return NextResponse.json({ title, publishedAt, mainImage, mdblocks });
+		return NextResponse.json({
+			title,
+			publishedAt,
+			mainImage,
+			contentTypes,
+			mdblocks,
+		});
 	} catch (err) {
 		return NextResponse.json(
 			{ error: "Something went wrong" },

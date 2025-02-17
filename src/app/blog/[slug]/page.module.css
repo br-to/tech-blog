@@ -24,6 +24,13 @@
   & > .main > .blocks:last-child {
     margin-bottom: 0;
   }
+
+  & > .main > .contentTypes {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    margin-top: var(--spacing-12);
+  }
 }
 
 .image-container {

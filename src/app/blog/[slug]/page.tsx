@@ -1,3 +1,4 @@
+import { Chip } from "@/components/Chip";
 import { format } from "date-fns";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -91,6 +92,10 @@ export default async function Page({
 					alt={blogContent.title}
 					fill
 					className={styles.image}
+					sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
+					priority
 				/>
 			</div>
 			<main className={styles.main}>
@@ -98,7 +103,6 @@ export default async function Page({
 				<p className={styles.date}>
 					{format(new Date(blogContent.publishedAt), "yyyy/MM/dd")} 公開
 				</p>
-
 				{blogContent.mdblocks.map((mdblock: any) => {
 					const formattedMarkdown = mdblock.parent.replace(/\n/g, "  \n");
 					return (
@@ -148,6 +152,13 @@ export default async function Page({
 						</div>
 					);
 				})}
+				{blogContent.contentTypes && blogContent.contentTypes.length > 0 && (
+					<div className={styles.contentTypes}>
+						{blogContent.contentTypes.map((text: string) => (
+							<Chip text={text} key={text} />
+						))}
+					</div>
+				)}
 			</main>
 		</div>
 	);
