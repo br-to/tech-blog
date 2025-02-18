@@ -21,9 +21,6 @@ export const generateMetadata = async ({
 			headers: {
 				"Content-Type": "application/json",
 			},
-			next: {
-				revalidate: 30,
-			},
 		},
 	);
 
@@ -71,9 +68,6 @@ export default async function Page({
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
-			},
-			next: {
-				revalidate: 30,
 			},
 		},
 	);
