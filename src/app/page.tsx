@@ -10,9 +10,6 @@ export default async function Page() {
 		headers: {
 			"Content-Type": "application/json",
 		},
-		next: {
-			revalidate: 30,
-		},
 	});
 
 	if (!res.ok) {
