@@ -16,7 +16,11 @@
 
   & > .content {
     padding: var(--spacing-4);
-    min-height: 150px;
+    min-height: 170px;
+
+    @media (--smartphone) {
+      min-height: auto;
+    }
   }
 
   & > .content > .category {
