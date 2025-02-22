@@ -35,6 +35,18 @@ export const GET = async (
 		}
 
 		const post = posts[0] as any;
+		const status = post.properties.status.status.name;
+
+		// 記事詳細でも公開していない記事は見れないようにする
+		if (status !== "published") {
+			return NextResponse.json(
+				{ error: "Not found." },
+				{
+					status: 404,
+				},
+			);
+		}
+
 		const title = post.properties.title.title[0]?.plain_text;
 		const publishedAt = post.properties.published_at.date.start;
 		const mainImage = post.properties.main_image.files[0]?.file.url;

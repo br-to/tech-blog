@@ -25,6 +25,14 @@
     margin-bottom: 0;
   }
 
+  & > .main > .blocks > .childBlocks {
+    margin-bottom: var(--spacing-2);
+  }
+
+  & > .main > .blocks > .childBlocks:last-child {
+    margin-bottom: 0;
+  }
+
   & > .main > .contentTypes {
     display: flex;
     align-items: center;

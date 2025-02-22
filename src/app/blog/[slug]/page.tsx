@@ -98,7 +98,7 @@ export default async function Page({
 					{format(new Date(blogContent.publishedAt), "yyyy/MM/dd")} 公開
 				</p>
 				{blogContent.mdblocks.map((mdblock: any) => {
-					const formattedMarkdown = mdblock.parent.replace(/\n/g, "  \n");
+					const formattedParentMarkdown = mdblock.parent.replace(/\n/g, "  \n");
 					return (
 						<div className={styles.blocks} key={mdblock.blockId}>
 							<Markdown
@@ -141,8 +141,41 @@ export default async function Page({
 								}}
 								className="markdown-body"
 							>
-								{formattedMarkdown}
+								{formattedParentMarkdown}
 							</Markdown>
+
+							{mdblock.children.length > 0 &&
+								mdblock.children.map((child: any) => {
+									const formattedChildMarkdown = child.parent.replace(
+										/\n/g,
+										"  \n",
+									);
+
+									return (
+										<div className={styles.childBlocks} key={child.blockId}>
+											<Markdown
+												remarkPlugins={[remarkGfm]}
+												components={{
+													ol: ({ node, ...props }) => (
+														<ol className={styles.ol} {...props} />
+													),
+													li: ({ node, ...props }) => (
+														<ul>
+															<li {...props} />
+														</ul>
+													),
+													// ブログ記事内のaタグは全て別タブ遷移にする
+													a: ({ node, ...props }) => (
+														<a target="_blank" {...props} />
+													),
+												}}
+												className="markdown-body"
+											>
+												{formattedChildMarkdown}
+											</Markdown>
+										</div>
+									);
+								})}
 						</div>
 					);
 				})}
