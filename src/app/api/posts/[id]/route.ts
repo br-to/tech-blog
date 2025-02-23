@@ -6,7 +6,9 @@ const notion = new Client({
 	auth: process.env.NOTION_TOKEN,
 });
 
-const n2m = new NotionToMarkdown({ notionClient: notion });
+const n2m = new NotionToMarkdown({
+	notionClient: notion,
+});
 
 export const GET = async (
 	_: Request,
@@ -54,9 +56,34 @@ export const GET = async (
 			(item: any) => item.name,
 		);
 
-		const mdblocks = (await n2m.pageToMarkdown(post.id, 2)).filter(
-			(mdblock) => mdblock.parent !== "",
-		);
+		// 🔥 100件以上のすべてのブロックを取得する関数
+		const fetchAllBlocks = async (blockId: string): Promise<any[]> => {
+			let blocks: any[] = [];
+			let cursor: string | undefined = undefined;
+
+			do {
+				const response = await notion.blocks.children.list({
+					block_id: blockId,
+					page_size: 100,
+					start_cursor: cursor, // 次のページを取得
+				});
+
+				blocks = blocks.concat(response.results);
+				cursor = response.next_cursor as string; // 次のページのカーソル
+			} while (cursor); // `next_cursor` が null になるまで繰り返す
+
+			return blocks;
+		};
+
+		const fetchMarkdown = async (blockId: string): Promise<string[]> => {
+			const blocks = await fetchAllBlocks(blockId);
+			const mdBlocks = await Promise.all(
+				blocks.map(async (block) => n2m.blockToMarkdown(block)),
+			);
+			return mdBlocks.filter((block) => block !== "");
+		};
+
+		const mdblocks = await fetchMarkdown(post.id);
 
 		return NextResponse.json({
 			title,
