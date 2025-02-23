@@ -65,7 +65,8 @@ export const GET = async (
 				const response = await notion.blocks.children.list({
 					block_id: blockId,
 					page_size: 100,
-					start_cursor: cursor, // 次のページを取得
+					// 次のページを取得
+					start_cursor: cursor,
 				});
 
 				blocks = blocks.concat(response.results);
