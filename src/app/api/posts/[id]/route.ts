@@ -56,7 +56,7 @@ export const GET = async (
 			(item: any) => item.name,
 		);
 
-		// 🔥 100件以上のすべてのブロックを取得する関数
+		// 100件以上のすべてのブロックを取得する関数
 		const fetchAllBlocks = async (blockId: string): Promise<any[]> => {
 			let blocks: any[] = [];
 			let cursor: string | undefined = undefined;
@@ -69,8 +69,10 @@ export const GET = async (
 				});
 
 				blocks = blocks.concat(response.results);
-				cursor = response.next_cursor as string; // 次のページのカーソル
-			} while (cursor); // `next_cursor` が null になるまで繰り返す
+				// 次のページのカーソル
+				cursor = response.next_cursor as string;
+				// `next_cursor` が null になるまで繰り返す
+			} while (cursor);
 
 			return blocks;
 		};
