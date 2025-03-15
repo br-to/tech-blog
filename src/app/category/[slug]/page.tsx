@@ -33,7 +33,7 @@ export default async function Page({
 	const blogPosts: BlogPost[] = await res.json();
 
 	return (
-		<div className={styles["blog-page"]}>
+		<div className={styles["category-page"]}>
 			<main className={styles.main}>
 				<h1 className={styles.title}>{category}</h1>
 				<div className={styles.grid}>

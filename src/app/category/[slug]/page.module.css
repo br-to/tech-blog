@@ -1,4 +1,4 @@
-.blog-page {
+.category-page {
   & > .main {
     max-width: var(--max-width);
     margin: 0 auto;
