@@ -71,6 +71,7 @@ export const GET = async (request: Request) => {
 			filter: filterObject,
 		});
 		const posts = response.results;
+
 		const postsProperties = posts.map((post: any) => {
 			const id = post.id;
 			const title = post.properties.title.title[0]?.plain_text;
@@ -79,7 +80,7 @@ export const GET = async (request: Request) => {
 			const contentTypes = post.properties.content_type.multi_select.map(
 				(item: any) => item.name,
 			);
-			const mainImage = post.properties.main_image.files[0]?.file.url;
+			const mainImage = post.properties.main_image.files[0]?.external.url;
 
 			return { id, title, slug, publishedAt, contentTypes, mainImage };
 		});

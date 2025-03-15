@@ -51,7 +51,7 @@ export const GET = async (
 
 		const title = post.properties.title.title[0]?.plain_text;
 		const publishedAt = post.properties.published_at.date.start;
-		const mainImage = post.properties.main_image.files[0]?.file.url;
+		const mainImage = post.properties.main_image.files[0]?.external.url;
 		const contentTypes = post.properties.content_type.multi_select.map(
 			(item: any) => item.name,
 		);
