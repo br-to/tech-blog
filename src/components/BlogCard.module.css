@@ -23,13 +23,6 @@
     }
   }
 
-  & > .content > .category {
-    display: block;
-    margin-bottom: var(--spacing-2);
-    color: var(--color-primary);
-    font-size: 0.875rem;
-  }
-
   & > .content > .title {
     font-size: 1.25rem;
     font-weight: 700;
@@ -42,7 +35,7 @@
     display: flex;
     align-items: center;
     gap: var(--spacing-2);
-    margin-bottom: var(--spacing-2);
+    margin-bottom: var(--spacing-4);
   }
 
   & > .content > .date {

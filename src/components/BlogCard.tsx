@@ -19,8 +19,8 @@ type BlogCardProps = {
 
 export function BlogCard({ post }: BlogCardProps) {
 	return (
-		<Link href={`/blog/${post.slug}`}>
-			<article className={styles["blog-card"]}>
+		<article className={styles["blog-card"]}>
+			<Link href={`/blog/${post.slug}`}>
 				<div className={styles["image-container"]}>
 					<Image
 						src={post.mainImage || "/test.jpg"}
@@ -32,20 +32,20 @@ export function BlogCard({ post }: BlogCardProps) {
               33vw"
 					/>
 				</div>
-				<div className={styles.content}>
-					{post.contentTypes && post.contentTypes.length > 0 && (
-						<div className={styles.contentTypes}>
-							{post.contentTypes.map((text) => (
-								<Chip text={text} key={text} />
-							))}
-						</div>
-					)}
-					<p className={styles.date}>
-						{format(post.publishedAt, "yyyy/MM/dd")}
-					</p>
+			</Link>
+			<div className={styles.content}>
+				{post.contentTypes && post.contentTypes.length > 0 && (
+					<div className={styles.contentTypes}>
+						{post.contentTypes.map((text) => (
+							<Chip text={text} key={text} />
+						))}
+					</div>
+				)}
+				<p className={styles.date}>{format(post.publishedAt, "yyyy/MM/dd")}</p>
+				<Link href={`/blog/${post.slug}`}>
 					<h2 className={styles.title}>{post.title}</h2>
-				</div>
-			</article>
-		</Link>
+				</Link>
+			</div>
+		</article>
 	);
 }
