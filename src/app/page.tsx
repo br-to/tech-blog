@@ -12,8 +12,8 @@ export default async function Page() {
 			headers: {
 				"Content-Type": "application/json",
 			},
-			// 10分キャッシュ
-			next: { revalidate: 60 * 10 },
+			// 60分キャッシュ
+			next: { revalidate: 60 * 60 },
 		},
 	);
 
