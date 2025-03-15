@@ -46,12 +46,10 @@
 }
 
 .image-container {
-  position: relative;
-  aspect-ratio: 16 / 9;
-  overflow: hidden;
-
-  & > .image {
-    object-fit: cover;
-    transition: transform 0.3s;
-  }
+  font-size: 75px;
+  display: flex;
+  justify-content: center;
+  min-height: 160px;
+  align-items: center;
+  background-color: var(--color-background-primary-lighter);
 }

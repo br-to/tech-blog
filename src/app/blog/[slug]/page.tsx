@@ -1,7 +1,6 @@
 import { Chip } from "@/components/Chip";
 import { format } from "date-fns";
 import type { Metadata } from "next";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import Markdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -46,7 +45,7 @@ export const generateMetadata = async ({
 			description: metaDescription,
 			images: [
 				{
-					url: blogContent.mainImage,
+					url: `${process.env.NEXT_PUBLIC_BASE_URL}/ogp.jpg`,
 					width: 1200,
 					height: 630,
 				},
@@ -82,19 +81,8 @@ export default async function Page({
 
 	return (
 		<div className={styles["blog-detail-page"]}>
-			<div className={styles["image-container"]}>
-				<Image
-					src={blogContent.mainImage}
-					alt={blogContent.title}
-					fill
-					className={styles.image}
-					sizes="(max-width: 768px) 100vw,
-              (max-width: 1200px) 50vw,
-              33vw"
-					priority
-				/>
-			</div>
 			<main className={styles.main}>
+				<p className={styles["icon"]}>{blogContent.icon}</p>
 				<h1 className={styles.title}>{blogContent.title}</h1>
 				<p className={styles.date}>
 					{format(new Date(blogContent.publishedAt), "yyyy/MM/dd")} 公開
