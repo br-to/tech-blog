@@ -1,12 +1,21 @@
 import { BlogCard, type BlogPost } from "@/components/BlogCard";
+import { notFound } from "next/navigation";
 import styles from "./page.module.css";
 
 // 常に動的レンダリングを強制する これをいれないとbuildでこけるため
 export const dynamic = "force-dynamic";
 
-export default async function Page() {
+export default async function Page({
+	params,
+}: { params: Promise<{ slug: string }> }) {
+	const { slug: category } = await params;
+
+	if (!category) {
+		notFound();
+	}
+
 	const res = await fetch(
-		`${process.env.NEXT_PUBLIC_BASE_URL}/api/posts?category=all`,
+		`${process.env.NEXT_PUBLIC_BASE_URL}/api/posts?category=${encodeURIComponent(category)}`,
 		{
 			method: "GET",
 			headers: {
@@ -18,7 +27,7 @@ export default async function Page() {
 	);
 
 	if (!res.ok) {
-		throw new Error(`Failed to fetch: ${res.status}`);
+		notFound();
 	}
 
 	const blogPosts: BlogPost[] = await res.json();
@@ -26,7 +35,7 @@ export default async function Page() {
 	return (
 		<div className={styles["blog-page"]}>
 			<main className={styles.main}>
-				<h1 className={styles.title}>All Posts</h1>
+				<h1 className={styles.title}>{category}</h1>
 				<div className={styles.grid}>
 					{blogPosts.map((post) => (
 						<BlogCard key={post.id} post={post} />

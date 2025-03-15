@@ -30,8 +30,35 @@ const notion = new Client({
 // 	};
 // };
 
-export const GET = async () => {
+export const GET = async (request: Request) => {
 	try {
+		const { searchParams } = new URL(request.url);
+		const category = searchParams.get("category") || "";
+
+		const filterObject =
+			category === "all"
+				? {
+						property: "status",
+						status: {
+							equals: "published",
+						},
+					}
+				: {
+						and: [
+							{
+								property: "status",
+								status: {
+									equals: "published",
+								},
+							},
+							{
+								property: "content_type",
+								multi_select: {
+									contains: category,
+								},
+							},
+						],
+					};
 		const response = await notion.databases.query({
 			database_id: process.env.NOTION_DATABASE_ID as string,
 			sorts: [
@@ -41,12 +68,7 @@ export const GET = async () => {
 					direction: "descending",
 				},
 			],
-			filter: {
-				property: "status",
-				status: {
-					equals: "published",
-				},
-			},
+			filter: filterObject,
 		});
 		const posts = response.results;
 		const postsProperties = posts.map((post: any) => {
