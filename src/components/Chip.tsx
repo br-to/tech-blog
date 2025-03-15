@@ -1,9 +1,14 @@
+import Link from "next/link";
 import styles from "./Chip.module.css";
 
 type Props = {
 	text: string;
 };
 
-export function Chip({ text }: Props) {
-	return <p className={styles.chip}>{text}</p>;
-}
+export const Chip = ({ text }: Props) => {
+	return (
+		<Link href={`/category/${text}/`} className={styles.chip}>
+			{text}
+		</Link>
+	);
+};
