@@ -40,18 +40,18 @@ export const GET = async (
 		const status = post.properties.status.status.name;
 
 		// 記事詳細でも公開していない記事は見れないようにする
-		// if (status !== "published") {
-		// 	return NextResponse.json(
-		// 		{ error: "Not found." },
-		// 		{
-		// 			status: 404,
-		// 		},
-		// 	);
-		// }
+		if (status !== "published") {
+			return NextResponse.json(
+				{ error: "Not found." },
+				{
+					status: 404,
+				},
+			);
+		}
 
 		const title = post.properties.title.title[0]?.plain_text;
 		const publishedAt = post.properties.published_at.date.start;
-		const icon = post.icon?.emoji;
+		const mainImage = post.properties.main_image.files[0]?.file.url;
 		const contentTypes = post.properties.content_type.multi_select.map(
 			(item: any) => item.name,
 		);
@@ -91,7 +91,7 @@ export const GET = async (
 		return NextResponse.json({
 			title,
 			publishedAt,
-			icon,
+			mainImage,
 			contentTypes,
 			mdblocks,
 		});

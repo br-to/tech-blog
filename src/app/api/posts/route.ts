@@ -79,9 +79,9 @@ export const GET = async (request: Request) => {
 			const contentTypes = post.properties.content_type.multi_select.map(
 				(item: any) => item.name,
 			);
-			const icon = post.icon?.emoji;
+			const mainImage = post.properties.main_image.files[0]?.file.url;
 
-			return { id, title, slug, publishedAt, contentTypes, icon };
+			return { id, title, slug, publishedAt, contentTypes, mainImage };
 		});
 
 		if (postsProperties.length <= 0) {

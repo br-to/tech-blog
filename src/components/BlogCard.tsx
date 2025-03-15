@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+import Image from "next/image";
 import Link from "next/link";
 import styles from "./BlogCard.module.css";
 import { Chip } from "./Chip";
@@ -10,7 +11,6 @@ export type BlogPost = {
 	contentTypes: string[];
 	mainImage: string;
 	slug: string;
-	icon: string;
 };
 
 type BlogCardProps = {
@@ -21,7 +21,17 @@ export function BlogCard({ post }: BlogCardProps) {
 	return (
 		<article className={styles["blog-card"]}>
 			<Link href={`/blog/${post.slug}`}>
-				<p className={styles["image-container"]}>{post.icon}</p>
+				<div className={styles["image-container"]}>
+					<Image
+						src={post.mainImage || "/test.jpg"}
+						alt={post.title}
+						fill
+						className={styles.image}
+						sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
+					/>
+				</div>
 			</Link>
 			<div className={styles.content}>
 				{post.contentTypes && post.contentTypes.length > 0 && (
