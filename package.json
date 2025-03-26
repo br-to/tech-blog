@@ -13,7 +13,7 @@
 		"@vercel/analytics": "^1.5.0",
 		"@vercel/speed-insights": "^1.2.0",
 		"date-fns": "^4.1.0",
-		"next": "15.1.7",
+		"next": "15.2.4",
 		"notion-to-md": "^3.1.5",
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0",
@@ -34,7 +34,7 @@
 		"typescript": "^5"
 	},
 	"volta": {
-		"node": "23.3.0",
+		"node": "23.10.0",
 		"npm": "10.9.2"
 	}
 }
