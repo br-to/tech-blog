@@ -1,0 +1,25 @@
+{
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"extends": [
+		"config:recommended",
+		"group:definitelyTyped",
+		"group:allNonMajor",
+		":automergeMinor",
+		":automergePatch"
+	],
+	"enabledManagers": ["npm"],
+	"timezone": "Asia/Tokyo",
+	"prConcurrentLimit": 10,
+	"packageRules": [
+		{
+			"packagePatterns": ["^@types/"],
+			"enabled": false
+		},
+		{
+			"matchUpdateTypes": ["major"],
+			"draftPR": true
+		}
+	],
+	"separateMultipleMajor": true,
+	"schedule": ["at any time"]
+}
