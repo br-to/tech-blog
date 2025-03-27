@@ -103,48 +103,49 @@ export default async function Page({
 					const formattedParentMarkdown = mdblock.replace(/\n/g, "  \n");
 					return (
 						<div className={styles.blocks} key={`${mdblock}-${index}`}>
-							<Markdown
-								remarkPlugins={[remarkGfm]}
-								components={{
-									ol: ({ node, ...props }) => (
-										<ol className={styles.ol} {...props} />
-									),
-									li: ({ node, ...props }) => <li {...props} />,
-									// ブログ記事内のaタグは全て別タブ遷移にする
-									a: ({ node, ...props }) => <a target="_blank" {...props} />,
-									code: ({
-										node,
-										className,
-										children,
-										style,
-										...props
-									}: any) => {
-										const language = className?.split("-")?.at(-1);
+							<div className="markdown-body">
+								<Markdown
+									remarkPlugins={[remarkGfm]}
+									components={{
+										ol: ({ node, ...props }) => (
+											<ol className={styles.ol} {...props} />
+										),
+										li: ({ node, ...props }) => <li {...props} />,
+										// ブログ記事内のaタグは全て別タブ遷移にする
+										a: ({ node, ...props }) => <a target="_blank" {...props} />,
+										code: ({
+											node,
+											className,
+											children,
+											style,
+											...props
+										}: any) => {
+											const language = className?.split("-")?.at(-1);
 
-										if (!language) {
+											if (!language) {
+												return (
+													<code className={className} {...props}>
+														{children}
+													</code>
+												);
+											}
+
 											return (
-												<code className={className} {...props}>
-													{children}
-												</code>
+												<SyntaxHighlighter
+													style={atomDark}
+													language={language}
+													PreTag="div"
+													{...props}
+												>
+													{children?.toString() as string}
+												</SyntaxHighlighter>
 											);
-										}
-
-										return (
-											<SyntaxHighlighter
-												style={atomDark}
-												language={language}
-												PreTag="div"
-												{...props}
-											>
-												{children?.toString() as string}
-											</SyntaxHighlighter>
-										);
-									},
-								}}
-								className="markdown-body"
-							>
-								{formattedParentMarkdown}
-							</Markdown>
+										},
+									}}
+								>
+									{formattedParentMarkdown}
+								</Markdown>
+							</div>
 						</div>
 					);
 				})}
