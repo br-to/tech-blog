@@ -30,20 +30,17 @@ export const generateMetadata = async ({
 
 	const blogContent = await res.json();
 
-	const description = blogContent.mdblocks
-		.filter((mdblock: any) => mdblock.type === "paragraph")
-		.map((mdblock: any) => mdblock.parent.replace(/\n/g, "  \n"))
-		.join(",");
-
-	const metaDescription =
-		description.length > 100 ? `${description.slice(0, 100)}...` : description;
+	const description =
+		blogContent.markdown.length > 100
+			? `${blogContent.markdown.slice(0, 100).replace(/\n/g, "")}...`
+			: blogContent.markdown.replace(/\n/g, "");
 
 	return {
 		title: blogContent.title,
-		description: metaDescription,
+		description,
 		openGraph: {
 			title: blogContent.title,
-			description: metaDescription,
+			description,
 			images: [
 				{
 					url: blogContent.mainImage,
@@ -99,56 +96,45 @@ export default async function Page({
 				<p className={styles.date}>
 					{format(new Date(blogContent.publishedAt), "yyyy/MM/dd")} 公開
 				</p>
-				{blogContent.mdblocks.map((mdblock: any, index: number) => {
-					const formattedParentMarkdown = mdblock.replace(/\n/g, "  \n");
-					return (
-						<div className={styles.blocks} key={`${mdblock}-${index}`}>
-							<div className="markdown-body">
-								<Markdown
-									remarkPlugins={[remarkGfm]}
-									components={{
-										ol: ({ node, ...props }) => (
-											<ol className={styles.ol} {...props} />
-										),
-										li: ({ node, ...props }) => <li {...props} />,
-										// ブログ記事内のaタグは全て別タブ遷移にする
-										a: ({ node, ...props }) => <a target="_blank" {...props} />,
-										code: ({
-											node,
-											className,
-											children,
-											style,
-											...props
-										}: any) => {
-											const language = className?.split("-")?.at(-1);
+				{
+					<div className="markdown-body">
+						<Markdown
+							remarkPlugins={[remarkGfm]}
+							components={{
+								ol: ({ node, ...props }) => (
+									<ol className={styles.ol} {...props} />
+								),
+								li: ({ node, ...props }) => <li {...props} />,
+								// ブログ記事内のaタグは全て別タブ遷移にする
+								a: ({ node, ...props }) => <a target="_blank" {...props} />,
+								code: ({ node, className, children, style, ...props }: any) => {
+									const language = className?.split("-")?.at(-1);
 
-											if (!language) {
-												return (
-													<code className={className} {...props}>
-														{children}
-													</code>
-												);
-											}
+									if (!language) {
+										return (
+											<code className={className} {...props}>
+												{children}
+											</code>
+										);
+									}
 
-											return (
-												<SyntaxHighlighter
-													style={atomDark}
-													language={language}
-													PreTag="div"
-													{...props}
-												>
-													{children?.toString() as string}
-												</SyntaxHighlighter>
-											);
-										},
-									}}
-								>
-									{formattedParentMarkdown}
-								</Markdown>
-							</div>
-						</div>
-					);
-				})}
+									return (
+										<SyntaxHighlighter
+											style={atomDark}
+											language={language}
+											PreTag="div"
+											{...props}
+										>
+											{children?.toString() as string}
+										</SyntaxHighlighter>
+									);
+								},
+							}}
+						>
+							{blogContent.markdown.replace(/\n/g, "  \n")}
+						</Markdown>
+					</div>
+				}
 				{blogContent.contentTypes && blogContent.contentTypes.length > 0 && (
 					<div className={styles.contentTypes}>
 						{blogContent.contentTypes.map((text: string) => (
