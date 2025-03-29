@@ -56,44 +56,16 @@ export const GET = async (
 			(item: any) => item.name,
 		);
 
-		// 100件以上のすべてのブロックを取得する関数
-		const fetchAllBlocks = async (blockId: string): Promise<any[]> => {
-			let blocks: any[] = [];
-			let cursor: string | undefined = undefined;
-
-			do {
-				const response = await notion.blocks.children.list({
-					block_id: blockId,
-					page_size: 100,
-					// 次のページを取得
-					start_cursor: cursor,
-				});
-
-				blocks = blocks.concat(response.results);
-				// 次のページのカーソル
-				cursor = response.next_cursor as string;
-				// `next_cursor` が null になるまで繰り返す
-			} while (cursor);
-
-			return blocks;
-		};
-
-		const fetchMarkdown = async (blockId: string): Promise<string[]> => {
-			const blocks = await fetchAllBlocks(blockId);
-			const mdBlocks = await Promise.all(
-				blocks.map(async (block) => n2m.blockToMarkdown(block)),
-			);
-			return mdBlocks.filter((block) => block !== "");
-		};
-
-		const mdblocks = await fetchMarkdown(post.id);
+		const markdown = (await n2m.pageToMarkdown(post.id, 2)).filter(
+			(mdblock) => mdblock.parent !== "",
+		)[0].parent;
 
 		return NextResponse.json({
 			title,
 			publishedAt,
 			mainImage,
 			contentTypes,
-			mdblocks,
+			markdown,
 		});
 	} catch (err) {
 		return NextResponse.json(
