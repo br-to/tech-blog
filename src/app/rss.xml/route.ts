@@ -55,7 +55,7 @@ export async function GET() {
     <item>
       <title>${title}</title>
       <link>${process.env.NEXT_PUBLIC_BASE_URL}/${slug}</link>
-			<guid isPermaLink="true">${process.env.NEXT_PUBLIC_BASE_URL}/${slug}</guid>
+			<guid isPermaLink="true">${process.env.NEXT_PUBLIC_BASE_URL}/blog/${slug}</guid>
       <description>${summary}</description>
       <pubDate>${new Date(publishedAt).toUTCString()}</pubDate>
     </item>`,
