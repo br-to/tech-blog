@@ -32,6 +32,9 @@ export function Header() {
 								alt="Linkedin"
 							/>
 						</Link>
+						<Link href="/rss.xml" className={styles.item}>
+							<Image src="/rss.svg" width={20} height={20} alt="RSS" />
+						</Link>
 					</div>
 				</nav>
 			</div>
