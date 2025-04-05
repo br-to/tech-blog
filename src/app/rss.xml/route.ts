@@ -66,7 +66,8 @@ export async function GET() {
 
 	return new NextResponse(rss, {
 		headers: {
-			"Content-Type": "application/rss+xml; charset=utf-8",
+			"Content-Type": "text/xml; charset=utf-8",
+			"Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
 		},
 	});
 }
