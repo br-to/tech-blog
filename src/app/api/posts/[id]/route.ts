@@ -56,9 +56,9 @@ export const GET = async (
 			(item: any) => item.name,
 		);
 
-		const markdown = (await n2m.pageToMarkdown(post.id, 2)).filter(
-			(mdblock) => mdblock.parent !== "",
-		)[0].parent;
+		const markdown = (await n2m.pageToMarkdown(post.id, 2))
+			.filter((mdblock) => mdblock.parent !== "")[0]
+			.parent.replace(/^```markdown\n?|\n?```$/g, "");
 
 		return NextResponse.json({
 			title,
