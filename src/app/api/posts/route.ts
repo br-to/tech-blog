@@ -1,11 +1,6 @@
 import { Client } from "@notionhq/client";
+import type { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import { NextResponse } from "next/server";
-import {
-  PageObjectResponse,
-  PartialPageObjectResponse,
-  DatabaseObjectResponse,
-  PartialDatabaseObjectResponse
-} from "@notionhq/client/build/src/api-endpoints";
 
 const notion = new Client({
 	auth: process.env.NOTION_TOKEN,
@@ -78,47 +73,51 @@ export const GET = async (request: Request) => {
 		});
 		const posts = response.results;
 
+		// PageObjectResponse型のみ通す型ガード
+		function isPageObjectResponse(post: unknown): post is PageObjectResponse {
+			return (
+				typeof post === "object" &&
+				post !== null &&
+				"object" === typeof post &&
+				"properties" in post
+			);
+		}
+
 		const postsProperties = posts
-			.map((post) => {
-				if (
-					'post' in post && typeof post === 'object' && 'properties' in post
-				) {
-					const p = post as PageObjectResponse;
-					const id = p.id;
-					const title =
-						p.properties.title.type === 'title'
-							? p.properties.title.title[0]?.plain_text
-							: undefined;
-					const slug =
-						p.properties.slug.type === 'rich_text'
-							? p.properties.slug.rich_text[0]?.plain_text
-							: undefined;
-					const publishedAt =
-						p.properties.published_at.type === 'date'
-							? p.properties.published_at.date?.start
-							: undefined;
-					const contentTypes =
-						p.properties.content_type.type === 'multi_select'
-							? p.properties.content_type.multi_select.map((item) => item.name)
-							: [];
-					const mainImage =
-						p.properties.main_image.type === 'files'
-							? (() => {
-								const fileObj = p.properties.main_image.files[0];
-								if (!fileObj) return undefined;
-								if ('external' in fileObj) {
-									return fileObj.external.url;
-								} else if ('file' in fileObj) {
-									return fileObj.file.url;
-								}
-								return undefined;
-							})()
-							: undefined;
-					return { id, title, slug, publishedAt, contentTypes, mainImage };
-				}
-				return undefined;
-			})
-			.filter(Boolean);
+			.filter(isPageObjectResponse)
+			.map((p) => {
+				const id = p.id;
+				const title =
+					p.properties.title.type === "title"
+						? p.properties.title.title[0]?.plain_text
+						: undefined;
+				const slug =
+					p.properties.slug.type === "rich_text"
+						? p.properties.slug.rich_text[0]?.plain_text
+						: undefined;
+				const publishedAt =
+					p.properties.published_at.type === "date"
+						? p.properties.published_at.date?.start
+						: undefined;
+				const contentTypes =
+					p.properties.content_type.type === "multi_select"
+						? p.properties.content_type.multi_select.map((item) => item.name)
+						: [];
+				const mainImage =
+					p.properties.main_image.type === "files"
+						? (() => {
+							const fileObj = p.properties.main_image.files[0];
+							if (!fileObj) return undefined;
+							if ("external" in fileObj) {
+								return fileObj.external.url;
+							} else if ("file" in fileObj) {
+								return fileObj.file.url;
+							}
+							return undefined;
+						})()
+						: undefined;
+				return { id, title, slug, publishedAt, contentTypes, mainImage };
+			});
 
 		if (postsProperties.length <= 0) {
 			return NextResponse.json({ error: "Not Found" }, { status: 404 });
