@@ -142,6 +142,7 @@ export default async function Page({
 						))}
 					</div>
 				)}
+				{/* TODO: SNSシェア機能をここに実装する  */}
 			</main>
 		</div>
 	);
