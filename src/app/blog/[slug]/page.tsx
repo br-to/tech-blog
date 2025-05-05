@@ -1,5 +1,4 @@
 import { Chip } from "@/components/Chip";
-import { ShareButtons } from "@/components/ShareButtons";
 import { format } from "date-fns";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -10,14 +9,56 @@ import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import remarkGfm from "remark-gfm";
 import styles from "./page.module.css";
 import "@/styles/githubMarkdown.css";
+import { ShareButtons } from "@/components/ShareButtons";
 
-// ...existing code...
+export const generateMetadata = async ({
+	params,
+}: { params: Promise<{ slug: string }> }): Promise<Metadata> => {
+	const { slug } = await params;
+	const res = await fetch(
+		`${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${slug}`,
+		{
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+			},
+		},
+	);
+
+	if (!res.ok) {
+		notFound();
+	}
+
+	const blogContent = await res.json();
+
+	const description =
+		blogContent.markdown.length > 100
+			? `${blogContent.markdown.slice(0, 100).replace(/\n/g, "")}...`
+			: blogContent.markdown.replace(/\n/g, "");
+
+	return {
+		title: blogContent.title,
+		description,
+		openGraph: {
+			title: blogContent.title,
+			description,
+			images: [
+				{
+					url: blogContent.mainImage,
+					width: 1200,
+					height: 630,
+				},
+			],
+		},
+	};
+};
+
+// 常に動的レンダリングを強制する これをいれないとbuildでこけるため
+export const dynamic = "force-dynamic";
 
 export default async function Page({
 	params,
-}: {
-	params: Promise<{ slug: string }>;
-}) {
+}: { params: Promise<{ slug: string }> }) {
 	const { slug } = await params;
 	const res = await fetch(
 		`${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${slug}`,
