@@ -1,45 +1,54 @@
 import { Client } from "@notionhq/client";
+import type { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import { NextResponse } from "next/server";
 
 const notion = new Client({
 	auth: process.env.NOTION_TOKEN,
 });
 
-type NotionPost = {
-	id: string;
+type NotionPost = PageObjectResponse & {
 	properties: {
 		title: {
-			title: [
-				{
-					plain_text: string;
-				},
-			];
+			type: "title";
+			title: Array<{
+				type: "text";
+				text: { content: string };
+				plain_text: string;
+			}>;
 		};
 		slug: {
-			rich_text: [
-				{
-					plain_text: string;
-				},
-			];
+			type: "rich_text";
+			rich_text: Array<{
+				type: "text";
+				text: { content: string };
+				plain_text: string;
+			}>;
 		};
 		published_at: {
+			type: "date";
 			date: {
 				start: string;
+				end: string | null;
 			};
 		};
 		content_type: {
+			type: "multi_select";
 			multi_select: Array<{
 				name: string;
 			}>;
 		};
 		main_image: {
+			type: "files";
 			files: Array<{
+				type: "external";
+				name: string;
 				external: {
 					url: string;
 				};
 			}>;
 		};
 		status: {
+			type: "status";
 			status: {
 				name: string;
 			};
