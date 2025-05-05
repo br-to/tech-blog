@@ -12,35 +12,16 @@ export const ShareButtons = ({ url, title }: Props) => {
   const encodedUrl = encodeURIComponent(url);
   const encodedTitle = encodeURIComponent(title);
 
-  const shareOnTwitter = () => {
-    window.open(
-      `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`,
-      '_blank'
-    );
-  };
-
-  const shareOnFacebook = () => {
-    window.open(
-      `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
-      '_blank'
-    );
-  };
-
-  const shareOnLinkedIn = () => {
-    window.open(
-      `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
-      '_blank'
-    );
-  };
-
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Share this post</h2>
       <div className={styles.buttons}>
-        <button
-          onClick={shareOnTwitter}
+        <a
+          href={`https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`}
           className={styles.button}
           aria-label="Share on Twitter"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           <Image
             src="/twitter.svg"
@@ -49,11 +30,13 @@ export const ShareButtons = ({ url, title }: Props) => {
             height={24}
             className={styles.icon}
           />
-        </button>
-        <button
-          onClick={shareOnFacebook}
+        </a>
+        <a
+          href={`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`}
           className={styles.button}
           aria-label="Share on Facebook"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           <Image
             src="/facebook.svg"
@@ -62,11 +45,13 @@ export const ShareButtons = ({ url, title }: Props) => {
             height={24}
             className={styles.icon}
           />
-        </button>
-        <button
-          onClick={shareOnLinkedIn}
+        </a>
+        <a
+          href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`}
           className={styles.button}
           aria-label="Share on LinkedIn"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           <Image
             src="/linkedin.png"
@@ -75,7 +60,7 @@ export const ShareButtons = ({ url, title }: Props) => {
             height={24}
             className={styles.icon}
           />
-        </button>
+        </a>
       </div>
     </div>
   );
