@@ -12,7 +12,9 @@ import "@/styles/githubMarkdown.css";
 
 export const generateMetadata = async ({
 	params,
-}: { params: Promise<{ slug: string }> }): Promise<Metadata> => {
+}: {
+	params: Promise<{ slug: string }>;
+}): Promise<Metadata> => {
 	const { slug } = await params;
 	const res = await fetch(
 		`${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${slug}`,
@@ -57,7 +59,9 @@ export const dynamic = "force-dynamic";
 
 export default async function Page({
 	params,
-}: { params: Promise<{ slug: string }> }) {
+}: {
+	params: Promise<{ slug: string }>;
+}) {
 	const { slug } = await params;
 	const res = await fetch(
 		`${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${slug}`,
@@ -116,6 +120,39 @@ export default async function Page({
 												{children}
 											</code>
 										);
+									}
+
+									if (language === "codepen") {
+										try {
+											const url = String(children).trim();
+											const penIdMatch = url.match(/\/pen\/([^/?#]+)/);
+											const userMatch = url.match(/codepen\.io\/([^/]+)/);
+
+											if (!penIdMatch?.[1] || !userMatch?.[1]) {
+												throw new Error("Invalid CodePen URL format");
+											}
+
+											const penId = penIdMatch[1];
+											const user = userMatch[1];
+
+											return (
+												<iframe
+													className={styles["codepen-embed"]}
+													title="CodePen Embed"
+													src={`https://codepen.io/${user}/embed/${penId}?default-tab=html,result`}
+													loading="lazy"
+													allowFullScreen
+												/>
+											);
+										} catch (error) {
+											console.error("Failed to embed CodePen:", error);
+											return (
+												<p>
+													CodePen の埋め込みに失敗しました。URL
+													を確認してください。
+												</p>
+											);
+										}
 									}
 
 									return (
