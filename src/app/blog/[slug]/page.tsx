@@ -9,6 +9,7 @@ import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import remarkGfm from "remark-gfm";
 import styles from "./page.module.css";
 import "@/styles/githubMarkdown.css";
+import { ShareButtons } from "@/components/ShareButtons";
 
 export const generateMetadata = async ({
 	params,
@@ -179,7 +180,10 @@ export default async function Page({
 						))}
 					</div>
 				)}
-				{/* TODO: SNSシェア機能をここに実装する  */}
+				<ShareButtons
+					url={`${process.env.NEXT_PUBLIC_BASE_URL}/blog/${slug}`}
+					title={blogContent.title}
+				/>
 			</main>
 		</div>
 	);
