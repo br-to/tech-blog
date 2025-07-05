@@ -1,4 +1,3 @@
-import { Chip } from "@/components/Chip";
 import { format } from "date-fns";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -7,6 +6,7 @@ import Markdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import remarkGfm from "remark-gfm";
+import { Chip } from "@/components/Chip";
 import styles from "./page.module.css";
 import "@/styles/githubMarkdown.css";
 
