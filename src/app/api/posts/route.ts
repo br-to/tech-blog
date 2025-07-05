@@ -120,7 +120,7 @@ export const GET = async (request: Request) => {
 		}
 
 		return NextResponse.json(postsProperties);
-	} catch (err) {
+	} catch (_err) {
 		return NextResponse.json(
 			{ error: "Something went wrong" },
 			{ status: 500 },

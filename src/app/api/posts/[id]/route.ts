@@ -67,7 +67,7 @@ export const GET = async (
 			contentTypes,
 			markdown,
 		});
-	} catch (err) {
+	} catch (_err) {
 		return NextResponse.json(
 			{ error: "Something went wrong" },
 			{ status: 500 },

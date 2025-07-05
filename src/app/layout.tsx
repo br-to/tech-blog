@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import "@/styles/reset.css";
 import "@/styles/globals.css";
-import { Footer } from "@/components/Footer";
-import { Header } from "@/components/Header";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Footer } from "@/components/Footer";
+import { Header } from "@/components/Header";
 
 export const metadata: Metadata = {
 	title: "br-to Devlog",
