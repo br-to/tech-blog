@@ -6,15 +6,11 @@ import styles from "./page.module.css";
 export const dynamic = "force-dynamic";
 
 type PageProps = {
-    searchParams?: Promise<Record<string, string | string[] | undefined>> | Record<string, string | string[] | undefined>;
+	searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
-export default async function Page(props: PageProps) {
-	const resolvedSearchParams =
-		typeof props.searchParams === "object" && "then" in (props.searchParams as any)
-			? await (props.searchParams as Promise<Record<string, string | string[] | undefined>>)
-			: ((props.searchParams as Record<string, string | string[] | undefined>) || {});
-
+export default async function Page({ searchParams }: PageProps) {
+	const resolvedSearchParams = await searchParams;
 	const pageParam = resolvedSearchParams?.page;
 	const currentPage = Math.max(
 		1,
@@ -60,7 +56,11 @@ export default async function Page(props: PageProps) {
 						<BlogCard key={post.id} post={post} />
 					))}
 				</div>
-				<Pagination currentPage={safePage} totalPages={totalPages} basePath="/" />
+				<Pagination
+					currentPage={safePage}
+					totalPages={totalPages}
+					basePath="/"
+				/>
 			</main>
 		</div>
 	);
