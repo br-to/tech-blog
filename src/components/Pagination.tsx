@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import clsx from "clsx";
 import styles from "./Pagination.module.css";
 
 type PaginationProps = {
@@ -27,26 +28,32 @@ export function Pagination({
 	return (
 		<nav className={styles.pagination} aria-label="Pagination">
 			<Link
-				className={`${styles.pageButton} ${currentPage === 1 ? styles.disabled : ""}`}
+				className={clsx(styles.pageButton, {
+					[styles.disabled]: currentPage === 1,
+				})}
 				href={buildHref(Math.max(1, currentPage - 1))}
 				aria-disabled={currentPage === 1}
 			>
 				Prev
 			</Link>
 
-			{pages.map((p) => (
+			{pages.map((page) => (
 				<Link
-					key={p}
-					href={buildHref(p)}
-					aria-current={p === currentPage ? "page" : undefined}
-					className={`${styles.pageButton} ${p === currentPage ? styles.active : ""}`}
+					key={page}
+					href={buildHref(page)}
+					aria-current={page === currentPage ? "page" : undefined}
+					className={clsx(styles.pageButton, {
+						[styles.active]: page === currentPage,
+					})}
 				>
-					{p}
+					{page}
 				</Link>
 			))}
 
 			<Link
-				className={`${styles.pageButton} ${currentPage === totalPages ? styles.disabled : ""}`}
+				className={clsx(styles.pageButton, {
+					[styles.disabled]: currentPage === totalPages,
+				})}
 				href={buildHref(Math.min(totalPages, currentPage + 1))}
 				aria-disabled={currentPage === totalPages}
 			>
