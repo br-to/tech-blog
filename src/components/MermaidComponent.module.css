@@ -1,0 +1,61 @@
+.mermaid-wrapper {
+  width: 100%;
+  margin: 1rem 0;
+  text-align: center;
+  overflow-x: auto;
+}
+
+.mermaid-wrapper svg {
+  max-width: 100%;
+  height: auto;
+  background-color: transparent;
+}
+
+/* Mermaidチャートの基本スタイル調整 */
+.mermaid-wrapper :global(.node rect),
+.mermaid-wrapper :global(.node circle),
+.mermaid-wrapper :global(.node polygon) {
+  fill: #f8f9fa;
+  stroke: #dee2e6;
+  stroke-width: 1px;
+}
+
+.mermaid-wrapper :global(.node text) {
+  fill: #212529;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.mermaid-wrapper :global(.edgePath path) {
+  stroke: #6c757d;
+  stroke-width: 1.5px;
+}
+
+.mermaid-wrapper :global(.edgeLabel) {
+  background-color: #ffffff;
+  color: #212529;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+/* ダークモード対応 */
+@media (prefers-color-scheme: dark) {
+  .mermaid-wrapper :global(.node rect),
+  .mermaid-wrapper :global(.node circle),
+  .mermaid-wrapper :global(.node polygon) {
+    fill: #343a40;
+    stroke: #6c757d;
+  }
+
+  .mermaid-wrapper :global(.node text) {
+    fill: #f8f9fa;
+  }
+
+  .mermaid-wrapper :global(.edgePath path) {
+    stroke: #adb5bd;
+  }
+
+  .mermaid-wrapper :global(.edgeLabel) {
+    background-color: #212529;
+    color: #f8f9fa;
+  }
+}
