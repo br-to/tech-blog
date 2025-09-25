@@ -16,7 +16,7 @@ export const MermaidComponent = ({ chart }: MermaidProps) => {
 		mermaid.initialize({
 			startOnLoad: false,
 			theme: "default",
-			securityLevel: "loose",
+			securityLevel: "strict",
 		});
 
 		const renderChart = async () => {
@@ -26,7 +26,7 @@ export const MermaidComponent = ({ chart }: MermaidProps) => {
 					ref.current.innerHTML = "";
 
 					// ユニークなIDを生成
-					const id = `mermaid-${Math.random().toString(36).substr(2, 9)}`;
+					const id = `mermaid-${crypto.randomUUID()}`;
 
 					// Mermaidチャートをレンダリング
 					const { svg } = await mermaid.render(id, chart);
