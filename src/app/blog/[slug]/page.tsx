@@ -7,6 +7,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import remarkGfm from "remark-gfm";
 import { Chip } from "@/components/Chip";
+import { MermaidComponent } from "@/components/MermaidComponent";
 import styles from "./page.module.css";
 import "@/styles/githubMarkdown.css";
 import { ShareButtons } from "@/components/ShareButtons";
@@ -112,7 +113,14 @@ export default async function Page({
 								li: ({ node, ...props }) => <li {...props} />,
 								// ブログ記事内のaタグは全て別タブ遷移にする
 								a: ({ node, ...props }) => <a target="_blank" {...props} />,
-								code: ({ node, className, children, style, ...props }: any) => {
+								code: ({
+									className,
+									children,
+									...props
+								}: {
+									className?: string;
+									children?: React.ReactNode;
+								} & React.HTMLAttributes<HTMLElement>) => {
 									const language = className?.split("-")?.at(-1);
 
 									if (!language) {
@@ -121,6 +129,10 @@ export default async function Page({
 												{children}
 											</code>
 										);
+									}
+
+									if (language === "mermaid") {
+										return <MermaidComponent chart={String(children).trim()} />;
 									}
 
 									if (language === "codepen") {
@@ -161,9 +173,8 @@ export default async function Page({
 											style={atomDark}
 											language={language}
 											PreTag="div"
-											{...props}
 										>
-											{children?.toString() as string}
+											{String(children)}
 										</SyntaxHighlighter>
 									);
 								},
