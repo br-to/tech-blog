@@ -36,7 +36,11 @@ export default async function Page({
   };
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts?category=${category}&paginated=1&page=${currentPage}&pageSize=${PAGE_SIZE}`,
+    `${
+      process.env.NEXT_PUBLIC_BASE_URL
+    }/api/posts?category=${encodeURIComponent(
+      category
+    )}&paginated=1&page=${currentPage}&pageSize=${PAGE_SIZE}`,
     {
       method: 'GET',
       headers: {

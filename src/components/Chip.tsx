@@ -7,10 +7,7 @@ type Props = {
 
 export const Chip = ({ text }: Props) => {
   return (
-    <Link
-      href={`/category/${encodeURIComponent(text)}/`}
-      className={styles.chip}
-    >
+    <Link href={`/category/${text}/`} className={styles.chip}>
       {text}
     </Link>
   );
