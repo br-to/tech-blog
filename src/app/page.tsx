@@ -23,9 +23,9 @@ export default function Page() {
           <h1 className={styles.name}>Kobara Toi</h1>
           <p className={styles.title}>Blockchain Developer</p>
           <p className={styles.description}>
-            I'm a blockchain developer who moved from the Web2 world into Web3.
-            I build full-stack apps with Rails and Next.js, exploring how
-            usability and decentralization can work together.
+            I'm a blockchain developer transitioning from Web2 to Web3. I build
+            full-stack apps with Rails and Next.js, exploring how usability and
+            decentralization can coexist.
           </p>
         </div>
 
@@ -33,21 +33,6 @@ export default function Page() {
         <div id="links" className={styles.links}>
           <h2 className={styles.linksTitle}>Links</h2>
           <div className={styles.linksList}>
-            <Link
-              href={EXTERNAL_URLS.GITHUB}
-              className={styles.linkItem}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <div className={styles.linkIcon}>
-                <SocialIcon
-                  url={EXTERNAL_URLS.GITHUB}
-                  style={{ height: 40, width: 40 }}
-                />
-              </div>
-              <span className={styles.linkText}>GitHub</span>
-            </Link>
-
             <Link
               href={EXTERNAL_URLS.X}
               className={styles.linkItem}
@@ -61,21 +46,6 @@ export default function Page() {
                 />
               </div>
               <span className={styles.linkText}>X</span>
-            </Link>
-
-            <Link
-              href={EXTERNAL_URLS.LINKEDIN}
-              className={styles.linkItem}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <div className={styles.linkIcon}>
-                <SocialIcon
-                  url={EXTERNAL_URLS.LINKEDIN}
-                  style={{ height: 40, width: 40 }}
-                />
-              </div>
-              <span className={styles.linkText}>LinkedIn</span>
             </Link>
 
             <Link
@@ -133,6 +103,36 @@ export default function Page() {
                 </svg>
               </div>
               <span className={styles.linkText}>Note</span>
+            </Link>
+
+            <Link
+              href={EXTERNAL_URLS.GITHUB}
+              className={styles.linkItem}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div className={styles.linkIcon}>
+                <SocialIcon
+                  url={EXTERNAL_URLS.GITHUB}
+                  style={{ height: 40, width: 40 }}
+                />
+              </div>
+              <span className={styles.linkText}>GitHub</span>
+            </Link>
+
+            <Link
+              href={EXTERNAL_URLS.LINKEDIN}
+              className={styles.linkItem}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div className={styles.linkIcon}>
+                <SocialIcon
+                  url={EXTERNAL_URLS.LINKEDIN}
+                  style={{ height: 40, width: 40 }}
+                />
+              </div>
+              <span className={styles.linkText}>LinkedIn</span>
             </Link>
 
             <Link
