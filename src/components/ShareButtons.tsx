@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import { SocialIcon } from 'react-social-icons';
 import styles from './ShareButtons.module.css';
 
 type Props = {
@@ -23,12 +23,11 @@ export const ShareButtons = ({ url, title }: Props) => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Image
-            src="/twitter.svg"
-            alt="Twitter"
-            width={24}
-            height={24}
-            className={styles.icon}
+          <SocialIcon
+            network="x"
+            style={{ width: 32, height: 32 }}
+            bgColor="transparent"
+            fgColor="var(--color-text)"
           />
         </a>
         <a
@@ -38,12 +37,11 @@ export const ShareButtons = ({ url, title }: Props) => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Image
-            src="/facebook.svg"
-            alt="Facebook"
-            width={24}
-            height={24}
-            className={styles.icon}
+          <SocialIcon
+            network="facebook"
+            style={{ width: 32, height: 32 }}
+            bgColor="transparent"
+            fgColor="var(--color-text)"
           />
         </a>
         <a
@@ -53,12 +51,11 @@ export const ShareButtons = ({ url, title }: Props) => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Image
-            src="/linkedin.png"
-            alt="LinkedIn"
-            width={24}
-            height={24}
-            className={styles.icon}
+          <SocialIcon
+            network="linkedin"
+            style={{ width: 32, height: 32 }}
+            bgColor="transparent"
+            fgColor="var(--color-text)"
           />
         </a>
       </div>
