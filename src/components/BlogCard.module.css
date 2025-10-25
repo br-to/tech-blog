@@ -3,15 +3,18 @@
   position: relative;
   overflow: hidden;
   border-radius: 0.5rem;
-  transition: box-shadow 0.3s;
-  background-color: var(--color-white);
+  transition: all 0.3s;
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-background-secondary);
 
   &:hover {
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    background-color: var(--color-card-bg-hover);
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
   }
 
-  &:hover > .image-container > .image {
-    transform: scale(1.05);
+  &:hover > .emoji-container > .emoji {
+    transform: scale(1.1);
   }
 
   & > .content {
@@ -40,18 +43,26 @@
 
   & > .content > .date {
     margin-bottom: var(--spacing-2);
-    color: var(--color-text);
+    color: var(--color-text-secondary);
     font-size: 0.875rem;
   }
 }
 
-.image-container {
+.emoji-container {
   position: relative;
   aspect-ratio: 16 / 9;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-card-bg-hover);
 
-  & > .image {
-    object-fit: cover;
+  & > .emoji {
+    font-size: 5rem;
     transition: transform 0.3s;
+
+    @media (--smartphone) {
+      font-size: 4rem;
+    }
   }
 }
