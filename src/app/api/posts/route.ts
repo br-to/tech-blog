@@ -62,7 +62,7 @@ type BlogPost = {
   slug: string;
   publishedAt: string;
   contentTypes: string[];
-  mainImage: string;
+  emoji: string;
 };
 
 export const GET = async (request: Request) => {
@@ -122,7 +122,6 @@ export const GET = async (request: Request) => {
     } while (cursor);
 
     const posts = allResults;
-    console.log('posts', posts, posts.length);
 
     const postsProperties: BlogPost[] = posts.map((post) => ({
       id: post.id,
@@ -132,7 +131,7 @@ export const GET = async (request: Request) => {
       contentTypes: post.properties.content_type.multi_select.map(
         (item) => item.name
       ),
-      mainImage: post.properties.main_image.files[0]?.external.url || '',
+      emoji: post.icon?.type === 'emoji' ? post.icon.emoji : '📝',
     }));
 
     if (postsProperties.length <= 0) {
