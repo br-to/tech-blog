@@ -32,7 +32,7 @@ export function BottomNav() {
         <span className={styles.label}>Home</span>
       </Link>
 
-      <Link href="/blogs" className={styles.navItem}>
+      <Link href="/blog" className={styles.navItem}>
         <svg
           width="24"
           height="24"
