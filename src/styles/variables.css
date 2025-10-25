@@ -1,8 +1,11 @@
 :root {
-  --color-primary: #3355ff;
-  --color-text: #1f2937;
-  --color-text-secondary: #6b7280;
-  --color-background: #f9fafb;
+  --color-primary: #6366f1;
+  --color-text: #f9fafb;
+  --color-text-secondary: #9ca3af;
+  --color-background: #1a1a1a;
+  --color-background-secondary: #2a2a2a;
+  --color-card-bg: #2a2a2a;
+  --color-card-bg-hover: #333333;
   --color-border: #e5e7eb;
   --color-white: #fff;
   --max-width: 1200px;
